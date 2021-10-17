@@ -71,7 +71,21 @@ SELECT OrderID,OrderDate,CustomerID
 FROM Orders
 WHERE ShipCountry = 'Argentina' AND ShippedDate > GETDATE()
 
+ORDER BY - ćwiczenie
 
+1. Wybierz nazwy i kraje wszystkich klientów, wyniki posortuj według kraju, w
+ramach danego kraju nazwy firm posortuj alfabetycznie:
 
+SELECT Country,CompanyName FROM Customers ORDER BY Country,CompanyName ASC
+
+2. Wybierz informację o produktach (grupa, nazwa, cena), produkty posortuj wg
+grup a w grupach malejąco wg ceny:
+
+SELECT ProductName,UnitPrice,CategoryID FROM Products ORDER BY CategoryID,UnitPrice DESC 
+
+3. Wybierz nazwy i kraje wszystkich klientów mających siedziby w Japonii (Japan)
+lub we Włoszech (Italy), wyniki posortuj tak jak w pkt 1
+
+SELECT CompanyName,Country FROM Customers WHERE Country IN ('Japan','Italy') ORDER BY Country,CompanyName ASC
 
 	
