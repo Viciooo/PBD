@@ -123,9 +123,7 @@ WHERE OrderID = '10250'
 -- kolumnę zawierającą nr telefonu i nr faksu w formacie
 -- (numer telefonu i faksu mają być oddzielone przecinkiem):
 
-Declare @FaxAlternative CHAR = '-';
-SELECT CompanyName,Phone + ',' + Fax AS ContactUs
+SELECT CompanyName, Phone + ',' + isnull(Fax, 'NULL') AS ContactUs
 FROM Suppliers
 
--- PROBLEMY - chciałbym, żeby w przypadku gdy Fax IS NULL dalej uzyskać wartość: NULL,PhoneNum zamiast samego NULL 
 
