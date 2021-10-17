@@ -62,4 +62,16 @@ Warunki logiczne - ćwiczenie
 
 1. Wybierz nazwy i kraje wszystkich klientów mających siedziby w Japonii (Japan) lub we Włoszech (Italy):
 SELECT CompanyName,Country FROM Customers WHERE Country = 'Japan' OR Country='Italy'
+
+1. Napisz instrukcję select tak aby wybrać numer zlecenia, datę zamówienia, numer
+klienta dla wszystkich niezrealizowanych jeszcze zleceń, dla których krajem
+odbiorcy jest Argentyna:
+
+SELECT OrderID,OrderDate,CustomerID
+FROM Orders
+WHERE ShipCountry = 'Argentina' AND ShippedDate > GETDATE()
+
+
+
+
 	
