@@ -90,7 +90,7 @@ SELECT CompanyName,Country FROM Customers WHERE Country = 'Japan' OR Country='It
 
 SELECT OrderID,OrderDate,CustomerID
 FROM Orders
-WHERE ShipCountry = 'Argentina' AND ShippedDate > GETDATE()
+WHERE ShipCountry = 'Argentina' AND (ShippedDate > GETDATE() OR ShippedDate IS NULL)
 
 -- ORDER BY - ćwiczenie
 
