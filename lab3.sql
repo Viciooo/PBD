@@ -78,3 +78,54 @@ FROM Orders
 WHERE YEAR(ShippedDate) = 1997
 GROUP BY ShipVia
 ORDER BY value DESC
+-- ################################
+
+USE Northwind
+SELECT ProductID,SUM(Quantity) AS total_quantity
+FROM orderhist
+GROUP BY ProductID
+HAVING SUM(quantity) >= 30
+
+-- 1. Wyświetl zamówienia dla których liczba pozycji zamówienia jest większa niż 5
+select orderID, count(ProductID) as Count
+from [Order Details]
+group by orderID
+having count(ProductID) > 5
+
+-- 2. Wyświetl klientów dla których w 1998 roku zrealizowano więcej niż 8 zamówień
+-- (wyniki posortuj malejąco wg łącznej kwoty za dostarczenie zamówień dla każdego z klientów)
+select CustomerID, count(OrderID), sum(Freight)
+from Orders
+where year(OrderDate) = 1998
+group by CustomerID
+having count(OrderID) > 8
+order by sum(Freight) desc
+
+-- #############
+
+-- 1.Ile lat przepracował w firmie każdy z pracowników?
+SELECT FirstName,LastName,DATEDIFF(YEAR ,HireDate,GETDATE()) AS working_time
+FROM Employees
+
+-- 2.Policz sumę lat przepracowanych przez wszystkich pracowników i średni czas pracy w firmie
+SELECT SUM(DATEDIFF(YEAR ,HireDate,GETDATE())) AS date_sum ,AVG(DATEDIFF(YEAR ,HireDate,GETDATE())) AS date_avg
+FROM Employees
+
+-- 3.Dla każdego pracownika wyświetl imię, nazwisko oraz wiek
+SELECT FirstName,LastName,DATEDIFF(YEAR ,BirthDate,GETDATE()) AS age
+FROM Employees
+
+-- 4.Policz średni wiek wszystkich pracowników
+SELECT AVG(DATEDIFF(YEAR ,BirthDate,GETDATE())) AS avg_age
+FROM Employees
+-- 5.Wyświetl wszystkich pracowników, którzy mają teraz więcej niż 25 lat.
+SELECT FirstName,LastName,DATEDIFF(YEAR ,BirthDate,GETDATE()) AS age
+FROM Employees
+WHERE DATEDIFF(YEAR ,BirthDate,GETDATE()) > 55
+
+-- TODO
+
+-- 6.Policz średnią liczbę miesięcy przepracowanych przez każdego pracownika
+-- 7.Wyświetl dane wszystkich pracowników, którzy przepracowali w firmie co najmniej 320 miesięcy, ale nie więcej niż 333
+
+
