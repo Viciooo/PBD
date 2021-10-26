@@ -9,10 +9,10 @@ WHERE UnitPrice BETWEEN 10 AND 20
 
 -- 2. Podaj maksymalną cenę produktu dla produktów o cenach poniżej 20$
 USE Northwind
-SELECT TOP 1 UnitPrice,ProductID
+-- TOP 1 jest niezgodny ze standardem, więc powinien być stosowany wyjątkowo.
+SELECT MAX(UnitPrice)
 FROM [Order Details]
 WHERE UnitPrice < 20
-ORDER BY UnitPrice DESC
 
 -- 3.Podaj maksymalną i minimalną i średnią cenę produktu dla produktów o
 -- produktach sprzedawanych w butelkach (‘bottle’)
