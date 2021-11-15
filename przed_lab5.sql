@@ -205,3 +205,51 @@ ORDER BY SUM([O D].quantity*[O D].UnitPrice*(1 - [O D].Discount)) DESC
 
 
 
+-- z zajęć
+-- 1. Napisz polecenie, które wyświetla listę dzieci będących członkami biblioteki (baza
+-- library). Interesuje nas imię, nazwisko, data urodzenia dziecka i adres
+-- zamieszkania dziecka.
+use library
+SELECT m.firstname, m.lastname, birth_date, a.street, a.city, a.state
+FROM juvenile j
+INNER JOIN member m on m.member_no = j.member_no
+INNER JOIN adult a on a.member_no = j.adult_member_no
+
+
+-- 2. Napisz polecenie, które wyświetla listę dzieci będących członkami biblioteki (baza
+-- library). Interesuje nas imię, nazwisko, data urodzenia dziecka, adres
+-- zamieszkania dziecka oraz imię i nazwisko rodzica.
+
+use library
+SELECT m.firstname as [Childs Name], m.lastname as [Childs Surname],m2.firstname as [Adult Name], m2.lastname as [Adult Surname], birth_date, a.street, a.city, a.state
+FROM juvenile j
+INNER JOIN member m on m.member_no = j.member_no
+INNER JOIN adult a on a.member_no = j.adult_member_no
+INNER JOIN member m2 on m2.member_no = a.member_no
+
+-- Prdzykład self join
+use joindb
+SELECT a.buyer_id AS buyer1, a.prod_id
+,b.buyer_id AS buyer2
+FROM sales AS a
+INNER JOIN sales AS b
+ON a.prod_id = b.prod_id
+
+-- 1 Napisz polecenie, które wyświetla pracowników oraz ich podwładnych (baza
+-- northwind)
+USE Northwind
+SELECT E.employeeID,E.LastName,E.FirstName,E1.employeeID,E1.LastName,E1.FirstName
+FROM Employees E
+JOIN Employees E1 ON E.ReportsTo = E1.employeeID
+
+-- 2 Napisz polecenie, które wyświetla pracowników, którzy nie mają podwładnych
+-- (baza northwind)
+select e.EmployeeID, e.LastName, em.EmployeeID, em.LastName
+from Employees e
+left join Employees em on e.EmployeeID = em.ReportsTo
+where em.EmployeeID is null
+
+-- 2.1 Wyświetl tylko szefów
+select distinct e.EmployeeID, e.LastName
+from Employees e
+join Employees em on e.EmployeeID = em.ReportsTo
